@@ -8,6 +8,7 @@ from haigha.transports.transport import Transport
 
 import errno
 import socket
+import ssl
 
 
 class SocketTransport(Transport):
@@ -95,6 +96,13 @@ class SocketTransport(Transport):
             # Note that no data means the socket is closed and we'll mark that
             # below
 
+
+        except ssl.SSLError, se:
+            ## In case it's a different type of error, but this is terrible
+            if se.message == 'The read operation timed out':
+                return None
+            raise
+                        
         except socket.timeout as e:
             # Note that this is implemented differently and though it would be
             # caught as an EnvironmentError, it has no errno. Not sure whose
