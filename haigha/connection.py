@@ -132,7 +132,7 @@ class Connection(object):
                 self._transport = SocketTransport(self)
             elif transport == 'geventssl':
                 from haigha.transports.geventssl_transport import GeventSSLTransport
-                self._transport = GeventSSLTransport(self)
+                self._transport = GeventSSLTransport(self, **kwargs)
                 
         else:
             self._transport = transport

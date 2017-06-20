@@ -11,7 +11,7 @@ class GeventSSLTransport(GeventTransport):
     def __init__(self, *args, **kwargs):
         super(GeventSSLTransport, self).__init__(*args)
         self.ca_certs = kwargs.get('ca_certs', None)
-        self.cert_reqs = kwargs.get('cert_reqs', None)
+        self.cert_reqs = kwargs.get('cert_reqs', ssl.CERT_REQUIRED)
 
     def connect(self, (host, port)):
         '''
